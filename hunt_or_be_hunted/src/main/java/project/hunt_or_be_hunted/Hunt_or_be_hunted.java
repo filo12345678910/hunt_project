@@ -12,6 +12,6 @@ package project.hunt_or_be_hunted;
 public class Hunt_or_be_hunted {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Prey a = new Prey("Bob", 100, 2, 10, "Squirrel", 50, 20);
     }
 }
