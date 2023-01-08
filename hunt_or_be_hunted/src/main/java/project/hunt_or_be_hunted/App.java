@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * JavaFX App
@@ -17,7 +19,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        
+        scene = new Scene(loadFXML("GUI"), 640, 480);
         stage.setScene(scene);
         stage.show();
     }
@@ -32,7 +35,11 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        Collection<Animal> Animals;
+        Animals = new ArrayList();
+        Animals.add(new Prey("Bob", 100, 2, 10, "Squirrel", 50, 20, 0, 0));
+        (new Thread(new Prey("Bob", 100, 2, 10, "Squirrel", 50, 20, 0, 0))).start();
+        System.out.println("sth");
         launch();
     }
-
 }
