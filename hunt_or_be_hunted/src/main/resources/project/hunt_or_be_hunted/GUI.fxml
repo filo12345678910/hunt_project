@@ -30,8 +30,9 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="67.0" layoutX="450.0" layoutY="244.0" stroke="BLACK" strokeType="INSIDE" width="67.0" />
       <Pane layoutX="28.0" layoutY="123.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: blue;">
          <children>
-            <Canvas height="200.0" width="200.0" />
+            <Canvas fx:id="board" height="200.0" width="200.0" />
          </children>
       </Pane>
+      <Button layoutX="314.0" layoutY="223.0" mnemonicParsing="false" onAction="#draw_board" text="DRAW" />
    </children>
 </AnchorPane>

@@ -9,7 +9,10 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 /**
  * FXML Controller class
@@ -17,6 +20,9 @@ import javafx.scene.input.MouseEvent;
  * @author filip
  */
 public class GUIController implements Initializable {
+
+    @FXML
+    private Canvas board;
 
     /**
      * Initializes the controller class.
@@ -36,6 +42,8 @@ public class GUIController implements Initializable {
         System.out.println("bbb");
     }
     public void draw_board(){
-        
+        GraphicsContext gc = board.getGraphicsContext2D();
+        gc.setFill(Color.BLUE);
+        gc.fillRect(75,75,100,100);
     }
 }
