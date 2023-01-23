@@ -10,4 +10,9 @@ package project.hunt_or_be_hunted;
  */
 public class Food_source extends Enviroment {
     private float replenish_speed;
+
+    public Food_source(int x, int y, int capacity, float _replenish_speed) {
+        super(x, y, capacity);
+        replenish_speed = _replenish_speed;
+    }
 }

@@ -12,7 +12,9 @@ public abstract class Enviroment {
     private int x;
     private int y;
     private int capacity;
-    public Enviroment(){
-        
+    public Enviroment(int _x, int _y, int _capacity){
+        x = _x;
+        y = _y;
+        capacity = _capacity;
     }
 }

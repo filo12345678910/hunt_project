@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import javafx.scene.Node;
+import javafx.scene.layout.GridPane;
 
 /**
  * JavaFX App
@@ -33,13 +35,36 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
-
+    
+    /*public static Node getNodeByCoordinate(Integer row, Integer column) {
+    for (Node node : gridLayout.getChildren()) {
+        if(GridPane.getColumnIndex(node) == row && GridPane.getColumnIndex(node) == column){
+            return node;
+        }
+    }
+    return null;
+    }*/
+    
+    public static void generate_Enviroment_Array(Collection<Enviroment> Enviroments){
+        for (int i = 0; i < Enviroments.size(); i++)
+        {
+            for (int j = 0; j < Enviroments.size(); j++)
+            {
+                Enviroments.add(new Crossroad(i, j, 1));
+            }
+        }
+    }
+    
+    public static void generate_Map(){
+        
+    }
+    
     public static void main(String[] args) {
-        Collection<Animal> Animals;
-        Animals = new ArrayList();
+        Collection<Animal> Animals = new ArrayList();
+        Collection<Enviroment> Enviroments = new ArrayList<Enviroment>();
+        generate_Enviroment_Array(Enviroments);
         Animals.add(new Prey("Bob", 100, 2, 10, "Squirrel", 50, 20, 0, 0));
         (new Thread(new Prey("Bob", 100, 2, 10, "Squirrel", 50, 20, 0, 0))).start();
-        System.out.println("sth");
         launch();
     }
 }

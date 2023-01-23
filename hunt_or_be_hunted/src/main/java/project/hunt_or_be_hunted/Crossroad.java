@@ -8,11 +8,8 @@ package project.hunt_or_be_hunted;
  *
  * @author filip
  */
-public class Water_source extends Enviroment {
-    private float replenish_speed;
-
-    public Water_source(int x, int y, int capacity, float _replenish_speed) {
+public class Crossroad extends Enviroment{
+    public Crossroad(int x, int y, int capacity){
         super(x, y, capacity);
-        replenish_speed = _replenish_speed;
     }
 }

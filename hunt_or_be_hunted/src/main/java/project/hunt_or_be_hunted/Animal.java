@@ -14,18 +14,14 @@ public abstract class Animal {
     private float speed;
     private float strength;
     private String spiece;
-    private float x;
-    private float y;
     private boolean isAlive;
     
-    public Animal(String _name, float _health, float _speed, float _strength, String _spiece, float _x, float _y){
+    public Animal(String _name, float _health, float _speed, float _strength, String _spiece){
         name = _name;
         health = _health;
         speed = _speed;
         strength = _strength;
         spiece = _spiece;
-        x = _x;
-        y = _y;
         isAlive = true;
     }
 }
