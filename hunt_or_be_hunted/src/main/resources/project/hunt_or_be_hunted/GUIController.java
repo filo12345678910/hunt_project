@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -30,6 +31,8 @@ public class GUIController implements Initializable {
     static GridPane map;
     @FXML
     private GridPane map_p;
+    @FXML
+    private TextArea info_text_area;
     /**
      * Initializes the controller class.
      */
@@ -206,5 +209,35 @@ public class GUIController implements Initializable {
 
     @FXML
     private void create_random_predator(MouseEvent event) {
+        
+    }
+
+    @FXML
+    private void show_info(MouseEvent event) {
+        int row = -1;
+        int col = -1;
+
+        for (Node node : map.getChildren()) {
+            if (node.isVisible() && node.getBoundsInParent().contains(event.getX(), event.getY())) {
+                row = GridPane.getColumnIndex(node);
+                col = GridPane.getRowIndex(node);
+                break;
+            }
+        }
+        info_text_area.setText("Row: " + col + " Column: " + row + "\n" + "\n");
+        if (getEnviromentByCoordinate(row, col) instanceof Food_source){
+            info_text_area.appendText(((Food_source) getEnviromentByCoordinate(row, col)).Info() + "\n");
+        }
+        if (getEnviromentByCoordinate(row, col) instanceof Water_source){
+            info_text_area.appendText(((Water_source) getEnviromentByCoordinate(row, col)).Info() + "\n");
+        }
+        for(Animal animal : Animals){
+            if (animal instanceof Prey){
+                if(((Prey) animal).getX() == row && ((Prey) animal).getY() == col){
+                    info_text_area.appendText(((Prey) animal).info() + "\n");
+                }
+            }
+        }
+        //info_text_area.appendText();
     }
 }

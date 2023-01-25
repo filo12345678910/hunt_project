@@ -205,7 +205,7 @@ public class Prey extends Animal implements Runnable {
             food_level -= 30;
         }
         
-        if (water_level <= 0 || food_level <= 0){
+        if (water_level <= 0 || food_level <= 0 || getHealth() <= 0){
             die();
         }
         }
