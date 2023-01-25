@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
@@ -328,6 +329,7 @@
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="15" GridPane.rowIndex="15" />
                </children>
             </GridPane>
+            <Canvas fx:id="predator_canvas" height="800.0" mouseTransparent="true" width="800.0" />
          </children>
       </Pane>
       <GridPane hgap="50.0" layoutX="820.0" layoutY="14.0" prefHeight="50.0" prefWidth="600.0" vgap="50.0">
