@@ -63,16 +63,33 @@ public class Prey extends Animal implements Runnable {
             a.setResource((int) (a.getResource() - water_level));
             water_level = 100;
         }
+        System.out.println(info());
         Thread.sleep(1000);
     }
     synchronized
-    public void feed(){
-        
+    public void feed(Food_source a) throws InterruptedException{
+        if (a.getResource() < 100 - food_level){
+            food_level += a.getResource();
+            a.setResource(0);
+        }
+        else{
+            a.setResource((int) (a.getResource() - food_level));
+            food_level = 100;
+        }
+        System.out.println(info());
+        Thread.sleep(1000);
     }
     synchronized
     public void move(int dest_x, int dest_y){
-        if (GUIController.FreeSpace(dest_x, dest_y)){
-            GUIController.animal_moves(dest_x, dest_y, x, y);
+        try {
+            if (GUIController.FreeSpace(dest_x, dest_y)){
+                GUIController.animal_moves(dest_x, dest_y, x, y);
+                setX(dest_x);
+                setY(dest_y);
+            }
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
         }
     }
     public String info(){
@@ -98,7 +115,7 @@ public class Prey extends Animal implements Runnable {
         int goalY = -1;
         System.out.println(info());
         while(isIsAlive() == true){
-        if (goalX == -1 || goalY == -1){
+        if ((goalX == -1 || goalY == -1) || (goalX == x && goalY == y)){
             if (water_level < 50){
                 Enviroment goal = GUIController.getRandomEnviroment("Water_source");
                 goalX = goal.getX();
@@ -114,6 +131,7 @@ public class Prey extends Animal implements Runnable {
                 goalX = goal.getX();
                 goalY= goal.getY();
             }
+            System.out.println("GOAL:" + goalX + " " + goalY);
         }
         if ((water_level < 100) && (GUIController.getEnviromentByCoordinate(getX(), getY()) instanceof Water_source)){
             try {
@@ -123,7 +141,11 @@ public class Prey extends Animal implements Runnable {
             }
         }
         if ((food_level < 100) && (GUIController.getEnviromentByCoordinate(getX(), getY()) instanceof Food_source)){
-            feed();
+            try {
+                feed((Food_source) GUIController.getEnviromentByCoordinate(getX(), getY()));
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
         }
         if (goalX != getX() && goalY != getY()){
             if (new Random().nextInt(2) == 0){

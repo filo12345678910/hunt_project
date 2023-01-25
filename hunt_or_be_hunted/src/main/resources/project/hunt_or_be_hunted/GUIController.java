@@ -27,8 +27,9 @@ public class GUIController implements Initializable {
 
     static Collection<Animal> Animals = new ArrayList();
     static Collection<Enviroment> Enviroments = new ArrayList<>();
+    static GridPane map;
     @FXML
-    private GridPane map;
+    private GridPane map_p;
     /**
      * Initializes the controller class.
      */
@@ -37,13 +38,11 @@ public class GUIController implements Initializable {
         /*Animals.add(new Prey("Bob", 100, 2, 10, "Squirrel", 50, 20, 0, 0));
         (new Thread(new Prey("Bob", 100, 2, 10, "Squirrel", 50, 20, 0, 0))).start();*/
         //draw(1, 1, "blank.png");
+        map = map_p;
 
     }
-    public Node getNodeByCoordinate(int row, int column) {
-    int te = 0;
+    public static Node getNodeByCoordinate(int row, int column) {
     for (Node node : map.getChildren()) {
-        System.out.println(te);
-        te ++;
         if((GridPane.getRowIndex(node) == column) && (GridPane.getColumnIndex(node) == row)){
             return node;
         }
@@ -61,8 +60,8 @@ public class GUIController implements Initializable {
         return null;
     }
     
-    public void draw(int x, int y, String image){
-        ((ImageView) getNodeByCoordinate(x, y)).setImage(new Image(getClass().getResourceAsStream(image))); 
+    public static void draw(int x, int y, String image){
+        ((ImageView) getNodeByCoordinate(x, y)).setImage(new Image(GUIController.class.getResourceAsStream(image)));
     }
     public void drawArray(Collection<Enviroment> Enviroments){
         for (Enviroment enviroment : Enviroments){
@@ -181,7 +180,10 @@ public class GUIController implements Initializable {
         Enviroment env_dest = getEnviromentByCoordinate(dest_x, dest_y);
         Enviroment env_c = getEnviromentByCoordinate(x, y);
         if (env_c instanceof Crossroad){
-            
+            draw(x, y, "blank.png");
+        }
+        if (env_dest instanceof Crossroad){
+            draw(dest_x, dest_y, "blank_f.png");
         }
     }
 
