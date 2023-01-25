@@ -4,7 +4,11 @@
  */
 package project.hunt_or_be_hunted;
 
+import static java.lang.StrictMath.max;
 import java.util.Random;
+import static project.hunt_or_be_hunted.GUIController.Animals;
+import static project.hunt_or_be_hunted.GUIController.draw;
+import static project.hunt_or_be_hunted.GUIController.getEnviromentByCoordinate;
 
 /**
  *
@@ -92,6 +96,20 @@ public class Prey extends Animal implements Runnable {
             ex.printStackTrace();
         }
     }
+    synchronized
+    public void reproduce(int x, int y){
+        Prey ani = new Prey(getName(), max(new Random().nextInt(20)-10+getHealth(), 10), (float) max((float) (new Random().nextInt(4)*0.5)-1+getSpeed(), 0.5), max(new Random().nextInt(10)-5+getStrength(), 5), getSpiece(),
+        new Random().nextInt(5)+20, new Random().nextInt(5)+20, x, y);
+        Animals.add(ani);
+        (new Thread(ani)).start();
+    }
+    public void die(){
+        setIsAlive(false);
+        if (getEnviromentByCoordinate(x, y) instanceof Crossroad){
+            draw(x, y, "blank.png");
+        }
+        Animals.remove(this);
+    }
     public String info(){
         String i = "Name: " + getName() + "\n";
         i += "Health: " + getHealth() + "\n";
@@ -165,7 +183,7 @@ public class Prey extends Animal implements Runnable {
                 }
             }
             }
-        else if (goalX == getX()){
+        else if ((goalX == getX()) && (goalY != getY())){
             if (getY() > goalY){
                 move(getX(), getY()-1);
             }
@@ -173,7 +191,7 @@ public class Prey extends Animal implements Runnable {
                 move(getX(), getY()+1);
             }
         }
-        else if (goalY == getY()){
+        else if ((goalY == getY()) && (goalX != getX())){
             if (getX() > goalX){
                 move(getX()-1, getY());
             }
@@ -181,6 +199,16 @@ public class Prey extends Animal implements Runnable {
                 move(getX()+1, getY());
             }
         }
+        if ((goalX == x && goalY == y) && (GUIController.getEnviromentByCoordinate(getX(), getY()) instanceof Hideout)){
+            reproduce(x, y);
+            water_level -= 30;
+            food_level -= 30;
         }
+        
+        if (water_level <= 0 || food_level <= 0){
+            die();
+        }
+        }
+        die();
     }
 }

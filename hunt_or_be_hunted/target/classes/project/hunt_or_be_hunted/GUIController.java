@@ -84,6 +84,10 @@ public class GUIController implements Initializable {
     private void layout1(MouseEvent event) {
         System.out.println("testing");
         Enviroments.clear();
+        for (Animal animal: Animals){
+            animal.setIsAlive(false);
+        }
+        Animals.clear();
         for (int i = 0; i < 16; i++){
             for (int j = 0; j < 16; j++){
                 Enviroments.add(new Crossroad(i, j, 1));
@@ -126,12 +130,14 @@ public class GUIController implements Initializable {
     private void layout2(MouseEvent event) {
         System.out.println("testing 2");
         Enviroments.clear();
+        Animals.clear();
     }
 
     @FXML
     private void layout3(MouseEvent event) {
         System.out.println("testing 3");
         Enviroments.clear();
+        Animals.clear();
     }
     public String getRandomElement(List<String> list)
     {
