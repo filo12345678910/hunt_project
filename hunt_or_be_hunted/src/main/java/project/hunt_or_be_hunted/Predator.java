@@ -29,8 +29,6 @@ public class Predator extends Animal implements Runnable {
 
     @Override
     public void run() {
-        while(isIsAlive()){
-            
-        }
+        System.out.println("works predator");
     }
 }

@@ -14,14 +14,11 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 /**
  * FXML Controller class
  *
@@ -32,13 +29,10 @@ public class GUIController implements Initializable {
     static Collection<Animal> Animals = new ArrayList();
     static Collection<Enviroment> Enviroments = new ArrayList<>();
     static GridPane map;
-    static Canvas canvas_pr;
     @FXML
     private GridPane map_p;
     @FXML
     private TextArea info_text_area;
-    @FXML
-    private Canvas predator_canvas;
     /**
      * Initializes the controller class.
      */
@@ -48,7 +42,6 @@ public class GUIController implements Initializable {
         (new Thread(new Prey("Bob", 100, 2, 10, "Squirrel", 50, 20, 0, 0))).start();*/
         //draw(1, 1, "blank.png");
         map = map_p;
-        canvas_pr = predator_canvas;
 
     }
     public static Node getNodeByCoordinate(int row, int column) {
@@ -92,6 +85,7 @@ public class GUIController implements Initializable {
 
     @FXML
     private void layout1(MouseEvent event) {
+        System.out.println("testing");
         Enviroments.clear();
         for (Animal animal: Animals){
             animal.setIsAlive(false);
@@ -215,13 +209,7 @@ public class GUIController implements Initializable {
 
     @FXML
     private void create_random_predator(MouseEvent event) {
-        List<String> name = Arrays.asList("Adams", "Baker", "Clark", "Davis", "Evans", "Frank", "Ghosh", "Hills", "Irwin", "Jones", "Klein", "Lopez", "Mason", "Nalty", "Ochoa", "Patel", "Quinn", "Reily", "Smith", "Trott", "Usman", "Valdo", "White", "Xiang", "Yakub", "Zafar");
-        List<String> spiece = Arrays.asList("Bald eagle", "Golden eagle", "Osprey", "Peregrine falcon", "Goshawk", "Red-tailed hawk", "Rough-legged hawk", "Merlin", "Kestrel", "Harris's hawk");
         
-        Predator ani = new Predator(getRandomElement(name), (float) 100, (float) (new Random().nextInt(6)*0.5), (float) new Random().nextInt(40)+5, getRandomElement(spiece), true,
-        (float)new Random().nextInt(700)+50, (float)new Random().nextInt(700)+50);
-        Animals.add(ani);
-        (new Thread(ani)).start();
     }
 
     @FXML
@@ -250,14 +238,6 @@ public class GUIController implements Initializable {
                 }
             }
         }
-    }
-    public static void draw_predator(int x, int y){
-    GraphicsContext gc = canvas_pr.getGraphicsContext2D();
-    gc.setFill(Color.RED);
-    gc.fillRect(x, y, 20, 20);
-    }
-    public static void undraw_predator(int x, int y){
-    GraphicsContext gc = canvas_pr.getGraphicsContext2D();
-    gc.clearRect(x, y, 20, 20);
+        //info_text_area.appendText();
     }
 }

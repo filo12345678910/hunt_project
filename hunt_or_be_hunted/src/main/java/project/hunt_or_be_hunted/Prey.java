@@ -131,6 +131,7 @@ public class Prey extends Animal implements Runnable {
     public void run() {
         int goalX = -1;
         int goalY = -1;
+        System.out.println(info());
         while(isIsAlive() == true){
         if ((goalX == -1 || goalY == -1) || (goalX == x && goalY == y)){
             if (water_level < 50){
@@ -148,6 +149,7 @@ public class Prey extends Animal implements Runnable {
                 goalX = goal.getX();
                 goalY= goal.getY();
             }
+            System.out.println("GOAL:" + goalX + " " + goalY);
         }
         if ((water_level < 100) && (GUIController.getEnviromentByCoordinate(getX(), getY()) instanceof Water_source)){
             try {
