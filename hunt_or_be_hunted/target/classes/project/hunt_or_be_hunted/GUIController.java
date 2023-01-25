@@ -6,8 +6,10 @@ package project.hunt_or_be_hunted;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Objects;
+import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,8 +25,8 @@ import javafx.scene.layout.GridPane;
  */
 public class GUIController implements Initializable {
 
-    Collection<Animal> Animals = new ArrayList();
-    Collection<Enviroment> Enviroments = new ArrayList<>();
+    static Collection<Animal> Animals = new ArrayList();
+    static Collection<Enviroment> Enviroments = new ArrayList<>();
     @FXML
     private GridPane map;
     /**
@@ -34,10 +36,14 @@ public class GUIController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         /*Animals.add(new Prey("Bob", 100, 2, 10, "Squirrel", 50, 20, 0, 0));
         (new Thread(new Prey("Bob", 100, 2, 10, "Squirrel", 50, 20, 0, 0))).start();*/
+        //draw(1, 1, "blank.png");
 
     }
     public Node getNodeByCoordinate(int row, int column) {
+    int te = 0;
     for (Node node : map.getChildren()) {
+        System.out.println(te);
+        te ++;
         if((GridPane.getRowIndex(node) == column) && (GridPane.getColumnIndex(node) == row)){
             return node;
         }
@@ -45,7 +51,7 @@ public class GUIController implements Initializable {
     System.out.println("ERROR: PLACE NOT FOUND");
     return null;
     }
-    public Enviroment getEnviromentByCoordinate(int x, int y){
+    public static Enviroment getEnviromentByCoordinate(int x, int y){
         for (Enviroment enviroment : Enviroments){
             if (enviroment.getX() == x && enviroment.getY() == y){
                 return enviroment;
@@ -54,8 +60,9 @@ public class GUIController implements Initializable {
         System.out.println("ERROR: ENVIROMENT NOT FOUND");
         return null;
     }
+    
     public void draw(int x, int y, String image){
-        ((ImageView) getNodeByCoordinate(x, y)).setImage(new Image(getClass().getResourceAsStream(image)));
+        ((ImageView) getNodeByCoordinate(x, y)).setImage(new Image(getClass().getResourceAsStream(image))); 
     }
     public void drawArray(Collection<Enviroment> Enviroments){
         for (Enviroment enviroment : Enviroments){
@@ -126,5 +133,70 @@ public class GUIController implements Initializable {
     private void layout3(MouseEvent event) {
         System.out.println("testing 3");
         Enviroments.clear();
+    }
+    public String getRandomElement(List<String> list)
+    {
+        Random rand = new Random();
+        return list.get(rand.nextInt(list.size()));
+    }
+    public static Enviroment getRandomEnviroment(String env){
+        for (Enviroment enviroment : Enviroments){
+            if (enviroment instanceof Crossroad && "Crossroad".equals(env)){
+                return enviroment;
+            }
+            if (enviroment instanceof Food_source && "Food_source".equals(env)){
+                return enviroment;
+            }
+            if (enviroment instanceof Water_source && "Water_source".equals(env)){
+                return enviroment;
+            }
+            if (enviroment instanceof Hideout && "Hideout".equals(env)){
+                return enviroment;
+            }
+        }
+        return null;
+    }
+
+    /**
+     *
+     * check if animal can move
+     */
+    public static boolean FreeSpace(int x, int y){
+        Enviroment env = getEnviromentByCoordinate(x, y);
+        int cap = env.getCapacity();
+        int a = 0;
+        for(Animal animal : Animals){
+            if (animal instanceof Prey){
+                if(((Prey) animal).getX() == x && ((Prey) animal).getY() == y){
+                    a++;
+                }
+            }
+        }
+        if (a >= cap){
+            return false;
+        }
+        return true;
+    }
+    public static void animal_moves(int dest_x, int dest_y, int x, int y){
+        Enviroment env_dest = getEnviromentByCoordinate(dest_x, dest_y);
+        Enviroment env_c = getEnviromentByCoordinate(x, y);
+        if (env_c instanceof Crossroad){
+            
+        }
+    }
+
+    @FXML
+    private void create_random_prey(MouseEvent event) {
+        List<String> name = Arrays.asList("Adams", "Baker", "Clark", "Davis", "Evans", "Frank", "Ghosh", "Hills", "Irwin", "Jones", "Klein", "Lopez", "Mason", "Nalty", "Ochoa", "Patel", "Quinn", "Reily", "Smith", "Trott", "Usman", "Valdo", "White", "Xiang", "Yakub", "Zafar");
+        List<String> spiece = Arrays.asList("Dungeness Crab", "King Crab", "Blue Crab", "Coconut Crab", "Peekytoe Crab", "Brown Edible Crab", "Florida Stone Crab", "Japanese Spider Crab");
+        Enviroment spawn = getRandomEnviroment("Hideout");
+        Prey ani = new Prey(getRandomElement(name), new Random().nextInt(20)+30, (float) (new Random().nextInt(4)*0.5), new Random().nextInt(20)+5, getRandomElement(spiece),
+        new Random().nextInt(5)+20, new Random().nextInt(5)+20, spawn.getX(), spawn.getY());
+        Animals.add(ani);
+        (new Thread(ani)).start();
+    }
+
+    @FXML
+    private void create_random_predator(MouseEvent event) {
     }
 }

@@ -9,10 +9,26 @@ package project.hunt_or_be_hunted;
  * @author filip
  */
 public class Water_source extends Enviroment {
+
+    /**
+     * @return the resource
+     */
+    public int getResource() {
+        return resource;
+    }
+
+    /**
+     * @param resource the resource to set
+     */
+    public void setResource(int resource) {
+        this.resource = resource;
+    }
     private int replenish_speed;
+    private int resource;
 
     public Water_source(int x, int y, int capacity, int _replenish_speed) {
         super(x, y, capacity);
         replenish_speed = _replenish_speed;
+        resource = 100;
     }
 }

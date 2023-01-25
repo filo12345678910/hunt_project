@@ -11,6 +11,13 @@ package project.hunt_or_be_hunted;
 public abstract class Enviroment {
 
     /**
+     * @return the capacity
+     */
+    public int getCapacity() {
+        return capacity;
+    }
+
+    /**
      * @return the x
      */
     public int getX() {

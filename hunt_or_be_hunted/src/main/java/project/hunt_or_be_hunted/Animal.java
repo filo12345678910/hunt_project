@@ -9,6 +9,62 @@ package project.hunt_or_be_hunted;
  * @author filip
  */
 public abstract class Animal {
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @return the health
+     */
+    public float getHealth() {
+        return health;
+    }
+
+    /**
+     * @param health the health to set
+     */
+    public void setHealth(float health) {
+        this.health = health;
+    }
+
+    /**
+     * @return the speed
+     */
+    public float getSpeed() {
+        return speed;
+    }
+
+    /**
+     * @return the strength
+     */
+    public float getStrength() {
+        return strength;
+    }
+
+    /**
+     * @return the spiece
+     */
+    public String getSpiece() {
+        return spiece;
+    }
+
+    /**
+     * @return the isAlive
+     */
+    public boolean isIsAlive() {
+        return isAlive;
+    }
+
+    /**
+     * @param isAlive the isAlive to set
+     */
+    public void setIsAlive(boolean isAlive) {
+        this.isAlive = isAlive;
+    }
     private String name;
     private float health;
     private float speed;
