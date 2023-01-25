@@ -57,8 +57,7 @@ public class Prey extends Animal implements Runnable {
         y = _y;
         age = 0;
     }
-    synchronized
-    public void drink(Water_source a) throws InterruptedException{
+    public synchronized void drink(Water_source a) throws InterruptedException{
         if (a.getResource() < 100 - water_level){
             water_level += a.getResource();
             a.setResource(0);
@@ -67,11 +66,9 @@ public class Prey extends Animal implements Runnable {
             a.setResource((int) (a.getResource() - water_level));
             water_level = 100;
         }
-        System.out.println(info());
         Thread.sleep(1000);
     }
-    synchronized
-    public void feed(Food_source a) throws InterruptedException{
+    public synchronized void feed(Food_source a) throws InterruptedException{
         if (a.getResource() < 100 - food_level){
             food_level += a.getResource();
             a.setResource(0);
@@ -80,24 +77,17 @@ public class Prey extends Animal implements Runnable {
             a.setResource((int) (a.getResource() - food_level));
             food_level = 100;
         }
-        System.out.println(info());
         Thread.sleep(1000);
     }
-    synchronized
-    public void move(int dest_x, int dest_y){
-        try {
+    
+    public synchronized void move(int dest_x, int dest_y){
             if (GUIController.FreeSpace(dest_x, dest_y)){
                 GUIController.animal_moves(dest_x, dest_y, x, y);
                 setX(dest_x);
                 setY(dest_y);
             }
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
     }
-    synchronized
-    public void reproduce(int x, int y){
+    public synchronized void reproduce(int x, int y){
         Prey ani = new Prey(getName(), max(new Random().nextInt(20)-10+getHealth(), 10), (float) max((float) (new Random().nextInt(4)*0.5)-1+getSpeed(), 0.5), max(new Random().nextInt(10)-5+getStrength(), 5), getSpiece(),
         new Random().nextInt(5)+20, new Random().nextInt(5)+20, x, y);
         Animals.add(ani);
@@ -152,6 +142,7 @@ public class Prey extends Animal implements Runnable {
         if ((water_level < 100) && (GUIController.getEnviromentByCoordinate(getX(), getY()) instanceof Water_source)){
             try {
                 drink((Water_source) GUIController.getEnviromentByCoordinate(getX(), getY()));
+                Thread.sleep((long) (1000));
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
@@ -159,6 +150,7 @@ public class Prey extends Animal implements Runnable {
         if ((food_level < 100) && (GUIController.getEnviromentByCoordinate(getX(), getY()) instanceof Food_source)){
             try {
                 feed((Food_source) GUIController.getEnviromentByCoordinate(getX(), getY()));
+                Thread.sleep((long) (1000));
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
@@ -180,6 +172,11 @@ public class Prey extends Animal implements Runnable {
                     move(getX()+1, getY());
                 }
             }
+            try {
+                Thread.sleep((long) (1000*getSpeed()));
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
             }
         else if ((goalX == getX()) && (goalY != getY())){
             if (getY() > goalY){
@@ -187,6 +184,11 @@ public class Prey extends Animal implements Runnable {
             }
             else{
                 move(getX(), getY()+1);
+            }
+            try {
+                Thread.sleep((long) (1000*getSpeed()));
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
             }
         }
         else if ((goalY == getY()) && (goalX != getX())){
@@ -196,11 +198,21 @@ public class Prey extends Animal implements Runnable {
             else{
                 move(getX()+1, getY());
             }
+            try {
+                Thread.sleep((long) (1000*getSpeed()));
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
         }
         if ((goalX == x && goalY == y) && (GUIController.getEnviromentByCoordinate(getX(), getY()) instanceof Hideout)){
             reproduce(x, y);
             water_level -= 30;
             food_level -= 30;
+            try {
+                Thread.sleep((long) (1000));
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
         }
         
         if (water_level <= 0 || food_level <= 0 || getHealth() <= 0){

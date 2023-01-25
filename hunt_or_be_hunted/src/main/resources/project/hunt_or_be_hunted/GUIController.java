@@ -49,6 +49,7 @@ public class GUIController implements Initializable {
         //draw(1, 1, "blank.png");
         map = map_p;
         canvas_pr = predator_canvas;
+        (new Thread(new Renever())).start();
 
     }
     public static Node getNodeByCoordinate(int row, int column) {
@@ -102,6 +103,9 @@ public class GUIController implements Initializable {
                 Enviroments.add(new Crossroad(i, j, 1));
             }
         }
+        GraphicsContext gc = canvas_pr.getGraphicsContext2D();
+        gc.setFill(Color.TRANSPARENT);
+        gc.fillRect(0, 0, canvas_pr.getWidth(), canvas_pr.getHeight()); 
         Enviroments.remove(getEnviromentByCoordinate(3, 4));
         Enviroments.add(new Hideout(3, 4, 3));
         Enviroments.remove(getEnviromentByCoordinate(13, 14));
@@ -137,16 +141,50 @@ public class GUIController implements Initializable {
 
     @FXML
     private void layout2(MouseEvent event) {
-        System.out.println("testing 2");
         Enviroments.clear();
+        for (Animal animal: Animals){
+            animal.setIsAlive(false);
+        }
         Animals.clear();
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                Enviroments.add(new Crossroad(i, j, 1));
+            }
+        }
+        Enviroments.remove(getEnviromentByCoordinate(8, 8));
+        Enviroments.add(new Hideout(8, 8, 4));
+        Enviroments.remove(getEnviromentByCoordinate(10, 6));
+        Enviroments.add(new Water_source(10, 6, 4, 60));
+        Enviroments.remove(getEnviromentByCoordinate(6, 10));
+        Enviroments.add(new Food_source(6, 10, 4, 70));
+        GraphicsContext gc = canvas_pr.getGraphicsContext2D();
+        gc.setFill(Color.TRANSPARENT);
+        gc.fillRect(0, 0, canvas_pr.getWidth(), canvas_pr.getHeight());
+        drawArray(Enviroments);
     }
 
     @FXML
     private void layout3(MouseEvent event) {
-        System.out.println("testing 3");
         Enviroments.clear();
+        for (Animal animal: Animals){
+            animal.setIsAlive(false);
+        }
         Animals.clear();
+        for (int i = 0; i < 16; i++){
+            for (int j = 0; j < 16; j++){
+                Enviroments.add(new Crossroad(i, j, 1));
+            }
+        }
+        Enviroments.remove(getEnviromentByCoordinate(8, 8));
+        Enviroments.add(new Hideout(8, 8, 4));
+        Enviroments.remove(getEnviromentByCoordinate(1, 1));
+        Enviroments.add(new Water_source(1, 1, 4, 60));
+        Enviroments.remove(getEnviromentByCoordinate(13, 13));
+        Enviroments.add(new Food_source(13, 13, 4, 70));
+        GraphicsContext gc = canvas_pr.getGraphicsContext2D();
+        gc.setFill(Color.TRANSPARENT);
+        gc.fillRect(0, 0, canvas_pr.getWidth(), canvas_pr.getHeight());
+        drawArray(Enviroments);
     }
     public String getRandomElement(List<String> list)
     {
@@ -208,7 +246,7 @@ public class GUIController implements Initializable {
         List<String> spiece = Arrays.asList("Dungeness Crab", "King Crab", "Blue Crab", "Coconut Crab", "Peekytoe Crab", "Brown Edible Crab", "Florida Stone Crab", "Japanese Spider Crab");
         Enviroment spawn = getRandomEnviroment("Hideout");
         Prey ani = new Prey(getRandomElement(name), new Random().nextInt(20)+30, (float) (new Random().nextInt(4)*0.5), new Random().nextInt(20)+5, getRandomElement(spiece),
-        new Random().nextInt(5)+20, new Random().nextInt(5)+20, spawn.getX(), spawn.getY());
+        20, 20, spawn.getX(), spawn.getY());
         Animals.add(ani);
         (new Thread(ani)).start();
     }
@@ -218,7 +256,7 @@ public class GUIController implements Initializable {
         List<String> name = Arrays.asList("Adams", "Baker", "Clark", "Davis", "Evans", "Frank", "Ghosh", "Hills", "Irwin", "Jones", "Klein", "Lopez", "Mason", "Nalty", "Ochoa", "Patel", "Quinn", "Reily", "Smith", "Trott", "Usman", "Valdo", "White", "Xiang", "Yakub", "Zafar");
         List<String> spiece = Arrays.asList("Bald eagle", "Golden eagle", "Osprey", "Peregrine falcon", "Goshawk", "Red-tailed hawk", "Rough-legged hawk", "Merlin", "Kestrel", "Harris's hawk");
         
-        Predator ani = new Predator(getRandomElement(name), (float) 100, (float) (new Random().nextInt(6)*0.5), (float) new Random().nextInt(40)+5, getRandomElement(spiece), true,
+        Predator ani = new Predator(getRandomElement(name), (float) 100, (float) (new Random().nextInt(100)+20), (float) new Random().nextInt(40)+5, getRandomElement(spiece), true,
         (float)new Random().nextInt(700)+50, (float)new Random().nextInt(700)+50);
         Animals.add(ani);
         (new Thread(ani)).start();
@@ -251,11 +289,23 @@ public class GUIController implements Initializable {
             }
         }
     }
+    /**
+     *
+     * draw a predator at coordinates
+     * @param x
+     * @param y
+     */
     public static void draw_predator(int x, int y){
     GraphicsContext gc = canvas_pr.getGraphicsContext2D();
     gc.setFill(Color.RED);
     gc.fillRect(x, y, 20, 20);
     }
+    /**
+     *
+     * remove a predator at coordinates
+     * @param x
+     * @param y
+     */
     public static void undraw_predator(int x, int y){
     GraphicsContext gc = canvas_pr.getGraphicsContext2D();
     gc.clearRect(x, y, 20, 20);

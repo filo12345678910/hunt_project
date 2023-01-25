@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"project.hunt_or_be_hunted","l":"project.hunt_or_be_hunted"}];updateSearchResults();
