@@ -1,6 +1,6 @@
 # Hunt Project
 
-Project made for Object Programming course. To be finished.
+Project made for Object Programming course. Has basic GUI. To be finished.
 
 ## How to use:
 
