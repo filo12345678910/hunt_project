@@ -9,5 +9,7 @@ package project.hunt_or_be_hunted;
  * @author filip
  */
 public class Hideout extends Enviroment {
-    
+    public Hideout(int x, int y, int capacity){
+        super(x, y, capacity);
+    }
 }

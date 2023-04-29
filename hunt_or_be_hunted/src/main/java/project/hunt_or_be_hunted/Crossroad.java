@@ -8,13 +8,8 @@ package project.hunt_or_be_hunted;
  *
  * @author filip
  */
-public class Control_panel {
-    public static void addAnimal(){
-    }
-    public static void showAnimal(){
-    }
-    public static void removeAnimal(){
-    }
-    public static void breed(){
+public class Crossroad extends Enviroment{
+    public Crossroad(int x, int y, int capacity){
+        super(x, y, capacity);
     }
 }

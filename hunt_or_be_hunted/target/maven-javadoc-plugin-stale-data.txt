@@ -1,0 +1,54 @@
+@options
+@packages
+@argfile
+--class-path
+'C:/Users/filip/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13.jar;C:/Users/filip/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13.jar;C:/Users/filip/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13.jar;C:/Users/filip/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13.jar'
+--module-path
+'D:/Git/hunt_project/hunt_or_be_hunted/target/classes;C:/Users/filip/.m2/repository/org/openjfx/javafx-base/13/javafx-base-13-win.jar;C:/Users/filip/.m2/repository/org/openjfx/javafx-controls/13/javafx-controls-13-win.jar;C:/Users/filip/.m2/repository/org/openjfx/javafx-graphics/13/javafx-graphics-13-win.jar;C:/Users/filip/.m2/repository/org/openjfx/javafx-fxml/13/javafx-fxml-13-win.jar'
+--patch-module
+project.hunt_or_be_hunted='D:/Git/hunt_project/hunt_or_be_hunted/src/main/java'
+-encoding
+'UTF-8'
+-protected
+-source
+'11'
+--module-source-path
+'D:/Git/hunt_project/hunt_or_be_hunted/target/site/apidocs/src'
+-author
+-bottom
+'Copyright &#169; 2023. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'D:/Git/hunt_project/hunt_or_be_hunted/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'hunt_or_be_hunted 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' 'D:/Git/hunt_project/hunt_or_be_hunted/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'hunt_or_be_hunted 1.0-SNAPSHOT API'
+project.hunt_or_be_hunted
+'D:/Git/hunt_project/hunt_or_be_hunted/src/main/java/module-info.java'
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\allclasses-index.html = 1674635909031
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\allpackages-index.html = 1674635909034
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\copy.svg = 1674635909088
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\element-list = 1674635908896
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\help-doc.html = 1674635909081
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\index-all.html = 1674635909064
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\index.html = 1674635909069
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\jquery-ui.overrides.css = 1674635909125
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\member-search-index.js = 1674635909040
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\module-search-index.js = 1674635909036
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\overview-tree.html = 1674635909014
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\package-search-index.js = 1674635909038
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\script.js = 1674635909086
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\search-page.js = 1674635909104
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\search.html = 1674635909067
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\search.js = 1674635909096
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\stylesheet.css = 1674635909084
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\tag-search-index.js = 1674635909042
+D:\Git\hunt_project\hunt_or_be_hunted\target\site\apidocs\type-search-index.js = 1674635909039
